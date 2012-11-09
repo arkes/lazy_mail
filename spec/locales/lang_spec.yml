@@ -1,0 +1,19 @@
+en:
+  mailer:
+    my_mail_test:
+      test:
+        subject: "my test mail"
+  my_mail_test:
+    test:
+      subject: "rails default"
+  test:
+    hey:
+      my_mail_test:
+        test:
+          subject: "hey!"
+
+fr:
+  mailer:
+    my_mail_test:
+      test:
+        subject: "mon test email"

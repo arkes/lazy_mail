@@ -1,0 +1,109 @@
+= Lazy Mail
+
+lazy_mail is a lazy and quick way to use the function mail and offers configurations to write less code.
+
+== Installation
+
+<b>This Gem works only for Rails 3</b>
+
+Add this to your Gemfile and run the +bundle+ command.
+
+  gem 'lazy_mail'
+
+== Usage
+
+=== 1. Basics
+
+Your mailer before was:
+
+  class UserMailer < ActionMailer::Base
+    default :from => 'test@test.com'
+  
+    def confirmation(user)
+      @user = user
+      mail(:to => user.email, :subject => 'confirm')
+    end
+  end
+
+With lazy_mail you just write less code.
+Lazy_mail set +user+ as an instance variable +@user+ by default.
+
+  class UserMailer < ActionMailer::Base
+    def confirmation(user)
+      lazy_mail user
+    end
+  end
+
+And you email view doesn't change:
+
+  Hello <%= @user.username %>
+
+You can still use the options of mail:
+
+  lazy_mail user, { :to => 'another@test.com', :subject => 'my subject' }
+  
+
+You can pass many arguments as you like:
+
+  def confirmation(user, post, author)
+    lazy_mail user, post, author
+  end
+
+and just use in your mail view +@user+, +@post+, +@autor+.
+
+
+=== 2. Configurations
+
+=== Mailer Views
+
+The Views are now located in a different folder: +app/views/notifications/mailer_name/current_locale/+
+For example your locale is english the path will be:
+
+  views/notifications/user_mailer/en/confirmation.text.erb
+
+You can set the path you want in your initializer with:
+  
+  LazyMail.mailer_templates_path = 'notification'
+
+If you set it to +nil+ it will take the default rails path
+
+=== Option :to
+
+The mail option :to is set by default, but you have to configure it in your initializer:
+
+  Lazy.user_model = User
+
+Just put the name of the model you want to use to set the :to.
+
+By default it will call the method +email+, if you have another name change it in your initializer.
+
+  LazyMail.email_field = :email
+
+=== I18n subject
+
+The subject is a scope: +[:mailer, :mailer_name, :action_name]+, you can change it:
+  
+  LazyMail.i18n_scope = [:mailer, :class_name, :action_name]
+  => 'mailer.user_mailer.confirmation.subject'
+  
+If you prefer to use the rails default just set it to +nil+
+
+=== Option :from
+
+Set the option :from in the initializer
+
+  LazyMail.default_no_reply = 'no-reply@test.com'
+  
+=== Development
+
+For the development phase, you can set an option :to by default to overwrite user.email
+
+  LazyMail.development_mail = 'my_mail@test.com'
+
+If you use Git:
+
+  LazyMail.development_mail = :git
+  
+lazy_mail will take your git +git config user.email+
+
+You can find the initializer file {here}[https://github.com/arkes/lazy_mail/wiki/initializer]
