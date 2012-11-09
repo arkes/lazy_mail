@@ -26,7 +26,7 @@ Your mailer before was:
   end
 
 With lazy_mail you just write less code.
-Lazy_mail set +user+ as an instance variable +@user+ by default.
+lazy_mail set +user+ as an instance variable <tt>@user</tt> by default.
 
   class UserMailer < ActionMailer::Base
     def confirmation(user)
@@ -49,14 +49,14 @@ You can pass many arguments as you like:
     lazy_mail user, post, author
   end
 
-and just use in your mail view +@user+, +@post+, +@autor+.
+and just use in your mail view <tt>@user</tt>, <tt>@post</tt>, <tt>@autor</tt>.
 
 
 === 2. Configurations
 
 === Mailer Views
 
-The Views are now located in a different folder: +app/views/notifications/mailer_name/current_locale/+
+The views are now located in a different folder: +app/views/notifications/mailer_name/current_locale/+
 For example your locale is english the path will be:
 
   views/notifications/user_mailer/en/confirmation.text.erb
@@ -75,13 +75,13 @@ The mail option :to is set by default, but you have to configure it in your init
 
 Just put the name of the model you want to use to set the :to.
 
-By default it will call the method +email+, if you have another name change it in your initializer.
+By default it will call the method email, if you have another name change it in your initializer.
 
   LazyMail.email_field = :email
 
 === I18n subject
 
-The subject is a scope: +[:mailer, :mailer_name, :action_name]+, you can change it:
+The subject is a scope: <tt>[:mailer, :mailer_name, :action_name]</tt>, you can change it:
   
   LazyMail.i18n_scope = [:mailer, :class_name, :action_name]
   => 'mailer.user_mailer.confirmation.subject'
@@ -96,7 +96,7 @@ Set the option :from in the initializer
   
 === Development
 
-For the development phase, you can set an option :to by default to overwrite user.email
+For the development phase, you can set an option :to by default to overwrite +user.email+
 
   LazyMail.development_mail = 'my_mail@test.com'
 
@@ -104,6 +104,6 @@ If you use Git:
 
   LazyMail.development_mail = :git
   
-lazy_mail will take your git +git config user.email+
+lazy_mail will take your git <tt>git config user.email</tt>
 
 You can find the initializer file {here}[https://github.com/arkes/lazy_mail/wiki/initializer]
