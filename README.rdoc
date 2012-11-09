@@ -73,7 +73,7 @@ The mail option :to is set by default, but you have to configure it in your init
 
   Lazy.user_model = User
 
-Just put the name of the model you want to use to set the :to.
+Just put the name of the model you want to use.
 
 By default it will call the method email, if you have another name change it in your initializer.
 
@@ -106,4 +106,4 @@ If you use Git:
   
 lazy_mail will take your git <tt>git config user.email</tt>
 
-You can find the initializer file {here}[https://github.com/arkes/lazy_mail/wiki/initializer]
+You can find the initializer file {here}[https://github.com/arkes/lazy_mail/blob/master/misc/initializers/lazy_mail.rb]
